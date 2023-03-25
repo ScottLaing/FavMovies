@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6 pb-3">
+            <h2 class="text-primary">Favorite Movies and Series List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary ps-4 pe-4">
+                <i class="bi bi-plus-circle"></i> &nbsp; Add New Entry
+            </a>
+        </div>
+    </div>
+
+<table class="table table-hover" style="width:100%">
+
+    <thead>
+        <tr>
+            <th scope="col">
+                Name
+            </th>
+            <th scope="col">
+                Ranking
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{int n = 0;}
+        @foreach(var cat in Model)
+        {
+            n++;
+            @if (n % 2 == 0) 
+            {
+                    <tr>
+                        <td width="50%">
+                            @cat.Name
+                        </td>
+                        <td width="30%">
+                            @cat.DisplayOrder
+                        </td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                                <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            else
+            {
+                <tr class="table-primary">
+                    <td width="50%">
+                        @cat.Name
+                    </td>
+                    <td width="30%">
+                        @cat.DisplayOrder
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                                <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+            }
+        }
+    </tbody>
+
+</table>
+</div>
+
